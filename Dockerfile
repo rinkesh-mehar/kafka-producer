@@ -6,7 +6,10 @@ FROM meisterplan/jdk-base:11
 LABEL maintainer="rinkesh.k.mehar@gmail.com"
 
 # Add a volume pointing to /tmp
-VOLUME /temp
+VOLUME /tmp
+
+# Make port 8080 available to the world outside this container
+#EXPOSE 8082
 
 # The application's jar file
 ARG JAR_FILE=target/kafka-producer-v1.0.jar
@@ -15,4 +18,4 @@ ARG JAR_FILE=target/kafka-producer-v1.0.jar
 ADD ${JAR_FILE} kafka-producer-v1.0.jar
 
 # Run the jar file
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-jar", "kafka-producer-v1.0.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/kafka-producer-v1.0.jar"]
